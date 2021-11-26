@@ -9,7 +9,7 @@ interface Props {}
 
 interface Link {
   name: string;
-  to: string | (() => void);
+  to: string | (() => void) | undefined;
   isExternal: boolean;
 }
 
@@ -30,12 +30,14 @@ const Navigation: React.FC<Props> = () => {
     },
     {
       name: "Portfolio",
-      to: "https://alexandersantiago.com",
+      to: process.env.PORTFOLIO_URL,
       isExternal: true,
     },
   ];
 
-  const redirectToLink = (to: string): Window | null =>
+  const handleLogoClick = () => redirectToLink(process.env.TWITCH_URL);
+
+  const redirectToLink = (to: string | undefined): Window | null =>
     window.open(to, "_blank", "noopener,noreferrer");
 
   const toggleProjects = (): void => {
@@ -54,7 +56,7 @@ const Navigation: React.FC<Props> = () => {
 
   return (
     <Flex {...styles.wrapper}>
-      <Box {...styles.logo}>
+      <Box onClick={handleLogoClick} {...styles.logo}>
         <Image
           src="/images/logo.png"
           alt="Santi Codes"
@@ -95,6 +97,7 @@ const styles: any = {
     position: "relative",
     width: "7em",
     height: "2em",
+    cursor: "pointer",
   },
   links: {
     direction: "row",

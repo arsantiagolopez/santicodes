@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>What We're Building - Santi Codes</title>
+        <title>What We&apos;re Building - Santi Codes</title>
       </Head>
       <Layout>
         <Landing />
